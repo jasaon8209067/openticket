@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import News from './pages/News';
 import Shows from './pages/Shows';
 import Login from './pages/login';
+import Privacy from './pages/Privacy';
 
 
 
@@ -15,6 +16,7 @@ function App() {
     <Route path="/news" element={<News />} /> 
     <Route path="/shows" element={<Shows />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/privacy" element={<Privacy />} />
     
    </Routes>
 

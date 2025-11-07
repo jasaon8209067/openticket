@@ -1,5 +1,5 @@
 import React from 'react';
-import { news } from '../components/news';
+import { news } from './ui/news';
 
 
 // 1. 消息標籤組件

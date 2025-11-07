@@ -1,8 +1,8 @@
-import Header from "../component/Header";
-import Hero from "../component/Hero";
-import EventSection from "../component/EventSection";
-import NewsSection from "../component/NewsSection";
-import Footer from "../component/Footer";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
+import EventSection from "../components/EventSection";
+import NewsSection from "../components/NewsSection";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
