@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import EventSection from "../components/EventSection";
 import NewsSection from "../components/NewsSection";
 import Footer from "../components/Footer";
+import Top from '../components/ui/Top';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <EventSection />
       <NewsSection />
+      <Top />
       <Footer />
     </div>
   );
