@@ -11,8 +11,7 @@ function Header({ showSearchBar = false }) {
     setIsMenuOpen(!isMenuOpen);
   };
   
-  // 導航連結列表 (用於重複使用在 Header 和 Mobile Menu 中)
-  // 注意：會員資訊 (Link to "/login") 在桌面版會被移到右側功能群組
+
   const primaryNavLinks = (
     <>
       <Link to="/events" className="hover:underline transition duration-150 py-2 md:py-0" onClick={() => setIsMenuOpen(false)}>活動資訊</Link>
@@ -21,7 +20,7 @@ function Header({ showSearchBar = false }) {
   );
 
   return (
-    <header className="sticky top-0 z-50 bg-text text-bg shadow-lg">
+    <header className="sticky top-0 z-50 bg-text text-bg shadow-lg font-sans">
       <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-3">
         
         {/* 左側群組：Logo + 主要連結 */}
@@ -35,10 +34,6 @@ function Header({ showSearchBar = false }) {
             </nav>
         </div>
 
-
-        {/* 桌面端：右側功能群組 (md 螢幕以上顯示) 
-            排列順序: [搜尋欄] [會員資訊] [登入/註冊按鈕] 
-        */}
         <div className="hidden md:flex items-center space-x-4">
           
           {/* 1. 搜尋欄 */}

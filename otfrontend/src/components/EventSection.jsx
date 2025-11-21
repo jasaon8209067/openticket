@@ -73,7 +73,7 @@ function EventSection() {
       </div>
       
       <Button variant="outline" className="mt-6">
-        <Link to="/shows">顯示更多</Link>
+        <Link to="/Events">顯示更多</Link>
       </Button>
     </section>
   );

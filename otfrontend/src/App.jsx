@@ -6,6 +6,7 @@ import EventDetail from './pages/EventDetail';
 import Login from './pages/login';
 import Privacy from './pages/Privacy';
 import FAQList from './pages/FAQList';
+import FormPage from './pages/FormPage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     <Route path="/login" element={<Login />} />
     <Route path="/privacy" element={<Privacy />} />
     <Route path="/FAQList" element={<FAQList />} />
+    <Route path="/FormPage" element={<FormPage />} />
     
    </Routes>
 
