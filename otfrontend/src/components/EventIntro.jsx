@@ -30,7 +30,6 @@ export default function EventIntro({ eventId }) {
 
   return (
     <div className="pt-4">
-      {/* 將換行符號轉成 <br>，讓純文字內容正確換行 */}
       <div dangerouslySetInnerHTML={{ __html: intro.replace(/\n/g, '<br>') }} />
     </div>
   );
