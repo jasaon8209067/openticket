@@ -55,7 +55,12 @@ export default function EventDetail() {
       <main className="flex-1 bg-bg px-0 py-0 max-w-7xl mx-auto w-full">
         {/* 立即購票按鈕 */}
         <div className="flex justify-center gap-4 mt-4 px-4">
-          <Button className="bg-blue-600 text-white px-8 py-3 text-lg">立即購票</Button>
+          <Button
+            className="bg-blue-600 text-white px-8 py-3 text-lg"
+            onClick={() => navigate(`/Ticket?eventId=${event.id}`)}
+          >
+            立即購票
+          </Button>
         </div>
         {/* 收藏與分享按鈕 */}
         <EventShareActions

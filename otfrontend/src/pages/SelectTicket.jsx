@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./styles.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Breadcrumb from "../components/Breadcrumb";
+import '../Css/SelectTicket.css';
 
 // **** 設定Spring Boot基礎URL ****
 const BASE_API_URL = 'http://localhost:8080';
@@ -257,6 +260,17 @@ export default function SelectTicket() {
 
   return (
     <div className="ticketpage">
+      <Header />
+      {/* 麵包屑 */}
+      <div className="max-w-7xl mx-auto w-full px-0 py-0">
+        <Breadcrumb
+          items={[
+            { label: "首頁", to: "/" },
+            { label: "活動資訊", to: "/events" },
+            { label: event?.title || "購票" }
+          ]}
+        />
+      </div>
       <h1>🎫 線上購票系統</h1>
 
       <div className="event-info">
@@ -346,7 +360,7 @@ export default function SelectTicket() {
         </aside>
       </div>
 
-      <footer>頁尾區（可放版權、聯絡資訊）</footer>
+      <Footer />
     </div>
   );
 }
