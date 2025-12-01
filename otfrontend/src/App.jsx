@@ -9,6 +9,7 @@ import FormPage from './pages/FormPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MemberPage from './pages/MemberPage';
+import SelectTicket from './pages/SelectTicket';
 
 
 function App() {
