@@ -34,6 +34,7 @@ const useSessionTracker = (currentPage = 'homepage') => {
                     sessionId: sessionId,
                     page: currentPage, 
                 }),
+                credentials: "include",
             });
 
             if (!response.ok) {

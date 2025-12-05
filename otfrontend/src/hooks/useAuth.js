@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // --- 配置常數 ---
 const BASE_URL = 'http://localhost:8080';
@@ -143,7 +144,7 @@ export const useAuth = () => {
     // 狀態管理
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState("");
-    
+    const navigate = useNavigate();
     // 由於 JWT 是存在 HttpOnly Cookie 中 (前端無法讀取)，
     // 我們無法直接依賴 authToken 狀態。
     // 我們改為依賴 isLoggedIn 狀態，並在載入時調用 getProfile 來驗證 Cookie。
@@ -167,19 +168,40 @@ export const useAuth = () => {
 
     // 2. 登出函式：清除後端 Cookie 和本地狀態
     const logout = useCallback(async () => {
-        await actualApi.logout(); 
-        // 使用 Promise 確保在狀態設置完成後才 resolve
-        return new Promise(resolve => {
-            setUserName("");
-            setIsLoggedIn(false, () => { // 這裡使用過時的setState第二個參數，但 useState 不支持。
-                // 因此，我們無法保證這裡的狀態會立即更新，所以通常不推薦這樣做。
-                resolve();
+        try {
+            const res = await fetch("http://localhost:8080/member/logout", {
+                method: "POST",
+                credentials: "include"
             });
-            
-            // 最佳做法是直接設置狀態，並立即 resolve (因為 React 會處理批次更新)
-            resolve(); 
-        });
-    }, []);
+
+            // 無論結果如何，都清除本地狀態
+            setUserName("");
+            setIsLoggedIn(false);
+
+            // 如果後端返回 403/401，視為 Token 過期，導航並帶上狀態
+            if (res.status === 403 || res.status === 401) {
+                navigate("/login", { state: { expired: true } });
+                return;
+            }
+
+            // 登出成功或發生其他錯誤，導航到登入頁面
+            if (res.ok) {
+                // 如果後端成功，導航到首頁或登入頁
+                navigate("/login"); 
+            } else {
+                // 處理非 2xx 響應
+                console.error('Logout API failed with status:', res.status);
+                navigate("/login"); 
+            }
+
+        } catch (error) {
+            console.error('Logout API 網路錯誤:', error);
+            // 發生網路錯誤時，導航到登入頁面
+            setUserName("");
+            setIsLoggedIn(false);
+            navigate("/login");
+        }
+    }, [navigate]); // 確保依賴 navigate
 
     // 3. 檢查持久化狀態 (元件首次載入時驗證 JWT Cookie 的有效性)
     useEffect(() => {
