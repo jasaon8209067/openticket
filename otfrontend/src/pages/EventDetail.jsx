@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,7 @@ export default function EventDetail() {
   const [memberId, setMemberId] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 獲取會員 ID
   useEffect(() => {
@@ -58,6 +59,15 @@ export default function EventDetail() {
   }, [isLoggedIn, memberId, id]);
 
   const event = events.find(e => String(e.id) === String(id));
+
+  // 若從登入頁帶著 goTicket=1 返回且已登入，直接導向購票
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (isLoggedIn && params.get('goTicket') === '1' && event) {
+      navigate(`/Ticket?eventId=${event.id}`, { replace: true });
+    }
+  }, [isLoggedIn, location.search, event, navigate]);
+
   if (loading) {
     return <div className="text-center py-12">載入中...</div>;
   }
@@ -65,6 +75,15 @@ export default function EventDetail() {
     navigate("/events", { replace: true });
     return null;
   }
+
+  const handlePurchase = () => {
+    if (!isLoggedIn) {
+      alert('請先登入再購票');
+      navigate('/login', { state: { redirect: `/events/detail/${event.id}?goTicket=1` } });
+      return;
+    }
+    navigate(`/Ticket?eventId=${event.id}`);
+  };
 
   return (
     <div className="font-sans min-h-screen flex flex-col">
@@ -86,7 +105,7 @@ export default function EventDetail() {
         <div className="flex justify-center gap-4 mt-4 px-4">
           <Button
             className="bg-blue-600 text-white px-8 py-3 text-lg"
-            onClick={() => navigate(`/Ticket?eventId=${event.id}`)}
+            onClick={handlePurchase}
           >
             立即購票
           </Button>
