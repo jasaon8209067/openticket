@@ -84,7 +84,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                 "/member/verify-email-code", // 新增
                 "/api/announcements",
                 "/api/announcements/**",
-                "/api/events/**",
+                "/api/events/**", 
                 "/oauth2/**",
                 "/oauth2/**",
                 "/loginLog/add"
