@@ -165,6 +165,10 @@ public class ReservationsService {
         return repositoryrepo.findAllIdByUser_Id(userId);
     } 
 
+    public boolean checkReservations (Long reservationsId, Long userId) {
+        return repositoryrepo.existsByIdAndUserId(reservationsId, userId);
+    }
+
 }
 
 // 無法一次紀錄兩種不同的票種
