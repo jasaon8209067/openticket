@@ -15,7 +15,7 @@ const SLIDE_INTERVAL = 8000;
 
 // 備用圖片（當 API 圖片載入失敗時使用）
 const FALLBACK_IMAGES = [
-    "https://static.tixcraft.com/images/banner/image_ad2afde95404171db0d1a5eb3d307790.jpg",
+    "/images/test.jpg",
 ];
 
 function Hero() {
